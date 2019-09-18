@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhutroy.github.io/"/>
-  <updated>2019-09-18T01:41:44.333Z</updated>
+  <updated>2019-09-17T14:33:09.674Z</updated>
   <id>https://zhutroy.github.io/</id>
   
   <author>
@@ -15,21 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>text_md</title>
-    <link href="https://zhutroy.github.io/2019/09/18/text-md/"/>
-    <id>https://zhutroy.github.io/2019/09/18/text-md/</id>
-    <published>2019-09-18T01:41:44.000Z</published>
-    <updated>2019-09-18T01:41:44.333Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
