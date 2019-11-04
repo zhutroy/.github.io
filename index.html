@@ -251,6 +251,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zhutroy.github.io/2019/11/03/NAMD-membrane-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JL ZHU">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/鸡鸣寺.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="懒癌晚期的自我挣扎">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/03/NAMD-membrane-tutorial/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T22:33:30+08:00">
+                2019-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mem-tutorial"><a href="#mem-tutorial" class="headerlink" title="mem-tutorial"></a>mem-tutorial</h1><h2 id="Building-a-structural-model-of-KcsA"><a href="#Building-a-structural-model-of-KcsA" class="headerlink" title="Building a structural model of KcsA"></a>Building a structural model of KcsA</h2><ol>
+<li><p><strong>buildtetra.tcl</strong>  –读取单体，利用旋转矩阵生成四聚体</p>
+</li>
+<li><p>The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) contain 4 columns and 3 rows each. The matrix formed by the first three<br>columns and three rows describes a rotation, while the last column describe a translation. *<em>VMD uses 4×4 matrices to perform rotations and translations, so one must add a fourth row ({0 0 0 1}) to the matrices provided in the PDB file. *</em></p>
+</li>
+<li><p>Be sure to add spaces between vectors delimited by {}. <strong>坐标{}中间加空格</strong></p>
+</li>
+<li><p><strong>mono2ploy.tcl</strong> –The script should be able to read the transformation matrices described in REMARK 350 from a raw PDB file and output the multimeric form of the protein in a single pdb file .读取文件单体并且合并到一个文件。</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mono2poly <span class="number">1.0</span></span><br><span class="line">-------------</span><br><span class="line">REQUIREMENTS: VMD Version <span class="number">1.8</span><span class="number">.4</span> or better</span><br><span class="line"></span><br><span class="line">DESCRIPTION:</span><br><span class="line">  Generate complete biological unit from PDB BIOMT records</span><br><span class="line"></span><br><span class="line">EXAMPLE USAGE:</span><br><span class="line">  <span class="keyword">source</span> mono2poly.tcl</span><br><span class="line"></span><br><span class="line">  mol delete all</span><br><span class="line">  mol new <span class="number">1</span>c8e.pdb</span><br><span class="line">  <span class="keyword">set</span> sel [atomselect top all]</span><br><span class="line">  <span class="keyword">set</span> matrix [parsematrix <span class="number">1</span>c8e.pdb]</span><br><span class="line">  mono2poly -o outname $sel $matrix</span><br><span class="line"></span><br><span class="line">DOWNLOAD THE FILE:</span><br><span class="line">  mono2poly.tcl</span><br><span class="line"></span><br><span class="line">AUTHOR:</span><br><span class="line">  mashaojienuaa (mashaojie@nuaa.edu.cn)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Aligning the protein to axis–<strong>orient plugin</strong></p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> require Orient</span><br><span class="line">  <span class="keyword">namespace</span> import Orient::orient</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> sel [atomselect top <span class="string">"all"</span>]</span><br><span class="line">  <span class="keyword">set</span> I [draw principalaxes $sel]</span><br><span class="line">  <span class="keyword">set</span> A [orient $sel [<span class="keyword">lindex</span> $I <span class="number">2</span>] &#123;<span class="number">0</span> <span class="number">0</span> <span class="number">1</span>&#125;]</span><br><span class="line">  $sel move $A</span><br><span class="line">  <span class="keyword">set</span> I [draw principalaxes $sel]</span><br><span class="line">  <span class="keyword">set</span> A [orient $sel [<span class="keyword">lindex</span> $I <span class="number">1</span>] &#123;<span class="number">0</span> <span class="number">1</span> <span class="number">0</span>&#125;]</span><br><span class="line">  $sel move $A</span><br><span class="line">  <span class="keyword">set</span> I [draw principalaxes $sel]</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="6">
+<li><p><strong>Generating PSF</strong></p>
+<p>尽可能多的保留晶体文件中的信息，尽量保留结晶水信息。</p>
+<ul>
+<li><strong>DOWSER</strong>软件查看腔道内的水分子排布：</li>
+</ul>
+<p><a href="http://danger.med.unc.edu/hermans/dowser/dowser.htm" target="_blank" rel="noopener">http://danger.med.unc.edu/hermans/dowser/dowser.htm</a></p>
+<ul>
+<li><p><strong>However, before generating PSF and PDB files for the KcsA tetramer, we also need to check whether disulfide bonds between cysteine residues exist and what the protonation states of charged residues and histidines are. 需要检查文件中二硫键的存在和氨基酸残基的质子状态</strong></p>
+</li>
+<li><p>手动看HIS的质子状态：****protein and within 5 of resname HIS  ，the δ nitrogen of histidine is protonated (residue name “HSD”), the  nitrogen is protonated (“HSE”), or both nitrogens are protonated (“HSP”) </p>
+</li>
+<li><p><strong>solvate</strong></p>
+</li>
+<li><p><strong>remove unwanted water</strong></p>
+</li>
+<li><p><u>$all moveby [<strong>vecinvert</strong> [measure center $all]]</u> 将图像中心移动至原点</p>
+<p>$popc moveby [vecinvert [measure center <strong>$popc weight mass</strong>]] </p>
+</li>
+<li><p>*<em>same residue as *</em>:如果这个residue中任一原子被选择，则选中全部residue</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Placing-KcsA-in-a-membrane"><a href="#Placing-KcsA-in-a-membrane" class="headerlink" title="Placing KcsA in a membrane"></a>Placing KcsA in a membrane</h2><ul>
+<li><p><strong>resname POPC and  name P1</strong>:磷脂膜的头部原子</p>
+</li>
+<li><p><strong>size of simulation cell</strong>: Periodic boundary conditions are generally<br>used to avoid surface effects and because its use permits the efficient computation of long-range electrostatic interactions. However, if the size of the simulation cell is too small, periodic images will interact with themselves affecting the outcome of the simulation. When choosing the size of your membrane patch and water box, be<br>sure to leave at least *<em>15 ˚ A *</em> of space between the protein and the simulation cell boundaries on each direction. </p>
+</li>
+<li><p>usually between 50 to 100 mM for standard monovalent ions 离子浓度设置</p>
+</li>
+</ul>
+<h2 id="Running-a-simulation-of-KcsA"><a href="#Running-a-simulation-of-KcsA" class="headerlink" title="Running a simulation of KcsA"></a>Running a simulation of KcsA</h2><ul>
+<li>NBFIX参数可以更好的说明通道中离子和羰基氧的相互作用</li>
+<li>It is always desirable to give a bit of extra (<strong>∼ 1 ˚ A</strong>) space between the boundary atoms of your system and the boundaries of the simulation cell. </li>
+<li>molinfo top set a 77<br>molinfo top set b 77<br>molinfo top set c 90  设置周期性边界条件便于显示</li>
+<li><strong>PME</strong>参数选择：at least one grid point per ˚ A in each direction </li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zhutroy.github.io/2019/09/20/如何做好一场学术报告/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -561,7 +735,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
