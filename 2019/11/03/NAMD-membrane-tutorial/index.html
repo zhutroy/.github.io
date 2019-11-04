@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://zhutroy.github.io">
   <title>懒癌晚期的自我挣扎</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: NAMD-mem-tutorial mem-tutorialBuilding a structural model of KcsA buildtetra.tcl  –读取单体，利用旋转矩阵生成四聚体  The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) conta">
+  <meta name="description" content="NAMD-mem-tutorialmem-tutorialBuilding a structural model of KcsA buildtetra.tcl  –读取单体，利用旋转矩阵生成四聚体  The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) contain 4 co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="懒癌晚期的自我挣扎">
 <meta property="og:url" content="https://zhutroy.github.io/2019/11/03/NAMD-membrane-tutorial/index.html">
 <meta property="og:site_name" content="懒癌晚期的自我挣扎">
-<meta property="og:description" content="title: NAMD-mem-tutorial mem-tutorialBuilding a structural model of KcsA buildtetra.tcl  –读取单体，利用旋转矩阵生成四聚体  The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) conta">
+<meta property="og:description" content="NAMD-mem-tutorialmem-tutorialBuilding a structural model of KcsA buildtetra.tcl  –读取单体，利用旋转矩阵生成四聚体  The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) contain 4 co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-04T02:52:25.502Z">
+<meta property="og:updated_time" content="2019-11-04T14:45:02.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="懒癌晚期的自我挣扎">
-<meta name="twitter:description" content="title: NAMD-mem-tutorial mem-tutorialBuilding a structural model of KcsA buildtetra.tcl  –读取单体，利用旋转矩阵生成四聚体  The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) conta">
+<meta name="twitter:description" content="NAMD-mem-tutorialmem-tutorialBuilding a structural model of KcsA buildtetra.tcl  –读取单体，利用旋转矩阵生成四聚体  The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) contain 4 co">
   
     <link rel="alternative" href="/atom.xml" title="懒癌晚期的自我挣扎" type="application/atom+xml">
   
@@ -163,8 +163,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: NAMD-mem-tutorial</p>
-<h1 id="mem-tutorial"><a href="#mem-tutorial" class="headerlink" title="mem-tutorial"></a>mem-tutorial</h1><h2 id="Building-a-structural-model-of-KcsA"><a href="#Building-a-structural-model-of-KcsA" class="headerlink" title="Building a structural model of KcsA"></a>Building a structural model of KcsA</h2><ol>
+        <hr>
+<h2 id="NAMD-mem-tutorial"><a href="#NAMD-mem-tutorial" class="headerlink" title="NAMD-mem-tutorial"></a>NAMD-mem-tutorial</h2><h1 id="mem-tutorial"><a href="#mem-tutorial" class="headerlink" title="mem-tutorial"></a>mem-tutorial</h1><h2 id="Building-a-structural-model-of-KcsA"><a href="#Building-a-structural-model-of-KcsA" class="headerlink" title="Building a structural model of KcsA"></a>Building a structural model of KcsA</h2><ol>
 <li><p><strong>buildtetra.tcl</strong>  –读取单体，利用旋转矩阵生成四聚体</p>
 </li>
 <li><p>The transformation matrices provided in REMARK 350 of a PDB file (lines labeled BIOMT) contain 4 columns and 3 rows each. The matrix formed by the first three<br>columns and three rows describes a rotation, while the last column describe a translation. *<em>VMD uses 4×4 matrices to perform rotations and translations, so one must add a fourth row ({0 0 0 1}) to the matrices provided in the PDB file. *</em></p>
