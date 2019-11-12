@@ -218,10 +218,24 @@
     <article id="post-centos非root用户rpm安装--vncserver" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/12/centos非root用户rpm安装--vncserver/">centos非root用户rpm安装--vncserver</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/12/centos非root用户rpm安装--vncserver/" class="archive-article-date">
+  	<time datetime="2019-11-12T06:36:13.390Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="centos非root用户rpm安装–vncserver"><a href="#centos非root用户rpm安装–vncserver" class="headerlink" title="centos非root用户rpm安装–vncserver"></a>centos非root用户rpm安装–vncserver</h2><p>参考链接：<a href></a><strong><a href="https://blog.csdn.net/sdcxyz/article/details/47094221" target="_blank" rel="noopener">https://blog.csdn.net/sdcxyz/article/details/47094221</a></strong></p>
+        <p>参考链接：<a href></a><strong><a href="https://blog.csdn.net/sdcxyz/article/details/47094221" target="_blank" rel="noopener">https://blog.csdn.net/sdcxyz/article/details/47094221</a></strong></p>
 <p>非root用户安装rpm包不能直接使用rpm命令，使用rpm2cpio命令代替，解压到当前目录下。如安装vncserver</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpio vnc-server.rpm |cpio -idvm</span><br></pre></td></tr></table></figure>
 

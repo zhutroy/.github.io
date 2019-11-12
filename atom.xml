@@ -40,20 +40,19 @@
   </entry>
   
   <entry>
-    <title></title>
+    <title>centos非root用户rpm安装--vncserver</title>
     <link href="https://zhutroy.github.io/2019/11/12/centos%E9%9D%9Eroot%E7%94%A8%E6%88%B7rpm%E5%AE%89%E8%A3%85--vncserver/"/>
     <id>https://zhutroy.github.io/2019/11/12/centos非root用户rpm安装--vncserver/</id>
     <published>2019-11-12T06:36:13.390Z</published>
-    <updated>2019-11-12T06:36:13.624Z</updated>
+    <updated>2019-11-12T07:08:51.098Z</updated>
     
-    <content type="html"><![CDATA[<hr><h2 id="centos非root用户rpm安装–vncserver"><a href="#centos非root用户rpm安装–vncserver" class="headerlink" title="centos非root用户rpm安装–vncserver"></a>centos非root用户rpm安装–vncserver</h2><p>参考链接：<a href></a><strong><a href="https://blog.csdn.net/sdcxyz/article/details/47094221" target="_blank" rel="noopener">https://blog.csdn.net/sdcxyz/article/details/47094221</a></strong></p><p>非root用户安装rpm包不能直接使用rpm命令，使用rpm2cpio命令代替，解压到当前目录下。如安装vncserver</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpio vnc-server.rpm |cpio -idvm</span><br></pre></td></tr></table></figure><p>然后在自己根目录下的.bshrc下添加环境变量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd $home</span><br><span class="line">vim .bashrc</span><br><span class="line">export PATH=/home/zhujl/software/usr/bin:$PATH</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure><p>这样就可以调用vncserver命令了。</p>]]></content>
+    <content type="html"><![CDATA[<p>参考链接：<a href></a><strong><a href="https://blog.csdn.net/sdcxyz/article/details/47094221" target="_blank" rel="noopener">https://blog.csdn.net/sdcxyz/article/details/47094221</a></strong></p><p>非root用户安装rpm包不能直接使用rpm命令，使用rpm2cpio命令代替，解压到当前目录下。如安装vncserver</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm2cpio vnc-server.rpm |cpio -idvm</span><br></pre></td></tr></table></figure><p>然后在自己根目录下的.bshrc下添加环境变量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd $home</span><br><span class="line">vim .bashrc</span><br><span class="line">export PATH=/home/zhujl/software/usr/bin:$PATH</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure><p>这样就可以调用vncserver命令了。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;hr&gt;
-&lt;h2 id=&quot;centos非root用户rpm安装–vncserver&quot;&gt;&lt;a href=&quot;#centos非root用户rpm安装–vncserver&quot; class=&quot;headerlink&quot; title=&quot;centos非root用户rpm安装–vncserver&quot;&gt;&lt;
+        &lt;p&gt;参考链接：&lt;a href&gt;&lt;/a&gt;&lt;strong&gt;&lt;a href=&quot;https://blog.csdn.net/sdcxyz/article/details/47094221&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://blog.csdn
       
     
     </summary>
